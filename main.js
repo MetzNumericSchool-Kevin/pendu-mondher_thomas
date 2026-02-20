@@ -91,10 +91,14 @@ let lettreAppuyer = document.addEventListener("keydown",(event)=>{
             // Si la lettre est valide mais non presente dans le mot on augmente la valeur du nombre d'erreur
             if (compteur === 0){
                 nbErreur ++
+                //ajoute le dessin si lettre fausse
+                const dessinErreur = document.getElementById('error-1');
+                 dessinErreur.classList.remove('hidden');
+                
                 compteurhtml.textContent = nbErreur
             }
             compteur = 0
-            
+
 
             console.log(`compteur: ${compteur}`)
 
