@@ -1,35 +1,36 @@
 const mots = [
     "Soleil",
     "Montagne",
-    "Liberté",
-    "Océan",
-    "Forêt",
+    "Liberte",
+    "Ocean",
+    "Foret",
     "Voyage",
     "Musique",
-    "Étoile",
+    "Etoile",
     "Courage",
     "Bonheur",
-    "Rivière",
+    "Riviere",
     "Aventure",
     "Nuage",
     "Horizon",
     "Passion",
-    "Tempête",
+    "Tempete",
     "Silence",
-    "Lumière",
-    "Mystère",
+    "Lumiere",
+    "Mystere",
     "Espoir"
 ];
+
+let motRecherche = "";
 
 const boutonNewPartie = document.querySelector(".btn-primary")
 
 boutonNewPartie.addEventListener("click", () => {
-    let motRecherche
-
+    
     function randomMots() {
         let nbRandom = Math.floor(Math.random() * 20);
         console.log(nbRandom)
-        motRecherche = mots[nbRandom]
+        return motRecherche = mots[nbRandom]
     }
 
     randomMots()
@@ -53,6 +54,21 @@ let lettreAppuyer = document.addEventListener("keydown",(event)=>{
             window.alert("Lettre déjà joué")
        }else {
             lettreDejaJoue.push(event.key)
+            const tableauMotRechercher = motRecherche.toLowerCase().split("");
+            console.log(tableauMotRechercher)
+            console.log(typeof motRecherche)
+// debut
+            const placeholders = document.querySelectorAll('#word-display .letter-placeholder');
+            for (let i = 0; i < tableauMotRechercher.length; i++) {
+                if (tableauMotRechercher[i] === event.key) {
+                    if (placeholders[i]) placeholders[i].textContent = motRecherche[i];
+                }
+            }
+//fin
+            
+            
+
+            
        }
     }else {
         window.alert("Lettre non reconnue")
