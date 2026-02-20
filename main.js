@@ -25,12 +25,16 @@ let motRecherche = "";
 const lettreDejaJoue =[]
 const letters_used =document.querySelector('#letters-used')
 const boutonNewPartie = document.querySelector(".btn-primary")
-const placeholders = document.querySelectorAll('#word-display .letter-placeholder')
+const compteurhtml = document.querySelector('.compteur')
+let nbErreur = 0
+
+let compteur = 0
 
 
 //lorsque l'on clique sur bouton nouvelle partie
 boutonNewPartie.addEventListener("click", () => {
     
+
     //vider le tableau lettre deja joué + affichage lettre joué
     lettreDejaJoue.splice(0, lettreDejaJoue.length);
     letters_used.textContent = lettreDejaJoue
@@ -77,10 +81,24 @@ let lettreAppuyer = document.addEventListener("keydown",(event)=>{
             // Pour chaque lettre appuyer presente dans le mot on remplace le span par la lettre
             for (let i = 0; i < tableauMotRechercher.length; i++) {
                 if (tableauMotRechercher[i] === event.key) {
+                    const placeholders = document.querySelectorAll('#word-display .letter-placeholder')
                     if (placeholders[i]) placeholders[i].textContent = motRecherche[i]
                         letters_used.textContent = lettreDejaJoue
+                        compteur++
                 }
             }
+            
+            // Si la lettre est valide mais non presente dans le mot on augmente la valeur du nombre d'erreur
+            if (compteur === 0){
+                nbErreur ++
+                compteurhtml.textContent = nbErreur
+            }
+            compteur = 0
+            
+
+            console.log(`compteur: ${compteur}`)
+
+
             
             
 
