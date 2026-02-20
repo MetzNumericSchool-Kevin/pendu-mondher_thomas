@@ -44,11 +44,17 @@ boutonNewPartie.addEventListener("click", () => {
     }
 })
 
+const lettreDejaJoue =[]
+
 let lettreAppuyer = document.addEventListener("keydown",(event)=>{
     console.log(event.key)
     if (event.key.match("[a-z]")) {
-        
-    }else{
+       if (lettreDejaJoue.indexOf(event.key)!== -1){
+            window.alert("Lettre déjà joué")
+       }else {
+            lettreDejaJoue.push(event.key)
+       }
+    }else {
         window.alert("Lettre non reconnue")
     }
     
