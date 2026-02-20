@@ -20,23 +20,35 @@ const mots = [
     "Mystere",
     "Espoir"
 ];
-
+// déclaration de variables
 let motRecherche = "";
-
+const lettreDejaJoue =[]
+const letters_used =document.querySelector('#letters-used')
 const boutonNewPartie = document.querySelector(".btn-primary")
+const placeholders = document.querySelectorAll('#word-display .letter-placeholder')
 
+
+//lorsque l'on clique sur bouton nouvelle partie
 boutonNewPartie.addEventListener("click", () => {
     
+    //vider le tableau lettre deja joué + affichage lettre joué
+    lettreDejaJoue.splice(0, lettreDejaJoue.length);
+    letters_used.textContent = lettreDejaJoue
+    
+    // fonction pour selectionner mot aleatoire 
     function randomMots() {
         let nbRandom = Math.floor(Math.random() * 20);
         console.log(nbRandom)
         return motRecherche = mots[nbRandom]
     }
 
+    // appelle de la fonction 
     randomMots()
+
     console.log(motRecherche)
     console.log(`${motRecherche.length}`)
 
+    // Ajout des span en fonction du nombre de lettres dans le mot aléatoire
     const wordDisplay = document.querySelector('#word-display')
     const newSpan = "<span class=\"letter-placeholder\" > </span>"
     wordDisplay.innerHTML = newSpan
@@ -45,26 +57,33 @@ boutonNewPartie.addEventListener("click", () => {
     }
 })
 
-const lettreDejaJoue =[]
 
+// ecoute les lettres appuyées
 let lettreAppuyer = document.addEventListener("keydown",(event)=>{
     console.log(event.key)
+    // on verifie que la lettre est entre a & z
     if (event.key.match("[a-z]")) {
+
+        // on verifie si la lettre est déjà joué
        if (lettreDejaJoue.indexOf(event.key)!== -1){
             window.alert("Lettre déjà joué")
        }else {
+            // on ajoute la lettre dans les lettres déjà joué
             lettreDejaJoue.push(event.key)
             const tableauMotRechercher = motRecherche.toLowerCase().split("");
             console.log(tableauMotRechercher)
             console.log(typeof motRecherche)
-// debut
-            const placeholders = document.querySelectorAll('#word-display .letter-placeholder');
+            
+            // Pour chaque lettre appuyer presente dans le mot on remplace le span par la lettre
             for (let i = 0; i < tableauMotRechercher.length; i++) {
                 if (tableauMotRechercher[i] === event.key) {
-                    if (placeholders[i]) placeholders[i].textContent = motRecherche[i];
+                    if (placeholders[i]) placeholders[i].textContent = motRecherche[i]
+                        letters_used.textContent = lettreDejaJoue
                 }
             }
-//fin
+            
+            
+
             
             
 
